@@ -1,5 +1,8 @@
 FROM lapierre/java-alpine:11 as tomcat
 
+EXPOSE 8080
+VOLUME /opt/geoserver_data/ /opt/additional_libs /opt/additional_fonts
+
 ARG TOMCAT_VERSION=9.0.75
 ARG CORS_ENABLED=false
 ARG CORS_ALLOWED_ORIGINS=*
@@ -25,6 +28,8 @@ ENV CATALINA_OPTS="\$EXTRA_JAVA_OPTS \
     -Xbootclasspath/a:$CATALINA_HOME/lib/marlin.jar \
     -Dsun.java2d.renderer=sun.java2d.marlin.DMarlinRenderingEngine \
     -Dorg.geotools.coverage.jaiext.enabled=true"
+
+RUN apk --no-cache add fontconfig tzdata font-dejavu
 
 WORKDIR /opt/
 

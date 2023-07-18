@@ -117,7 +117,7 @@ docker run -it -p 80:8080 \
 
 ## How to add additional fonts to the docker image (e.g. for SLD styling)?
 
-If you want to add custom fonts (the base image only contains 26 fonts) by using a mount:
+If you want to add custom fonts (the base image only contains default Alpine fonts + font-dejavu) by using a mount:
 
 ```shell
 docker run -it -p 80:8080 \
