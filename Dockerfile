@@ -105,7 +105,14 @@ RUN rm -rf /tmp/*
 
 # copy scripts
 COPY *.sh /opt/
-RUN chmod +x /opt/*.sh
+RUN chmod +x /opt/*.sh \
+    && addgroup tomcat \
+    && adduser -D -G 'tomcat' tomcat \
+    && chown -R tomcat:tomcat $CATALINA_HOME \
+    && chown -R tomcat:tomcat $GEOSERVER_DATA_DIR \
+    && chown -R tomcat:tomcat $GEOSERVER_LIB_DIR
+
+USER tomcat
 
 ENTRYPOINT ["/opt/startup.sh"]
 
